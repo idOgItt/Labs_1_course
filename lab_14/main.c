@@ -9,23 +9,26 @@ typedef enum _kDir {
 
 int main(void) {
     const int N = 7;
-    int n, a[N][N], k;
+    int n, m, k;
     kDir dir;
 
     while (1) {
-        printf("Введите n (1 - %d, Завершить - 0): ", N);
+        printf("Введите n и m (1 - %d, Завершить - 0): ", N);
+        scanf("%d", &m);
         scanf("%d", &n);
 
-        if (n == 0)
+        if (n == 0 || m == 0)
             break;
 
-        if (n < 1 || n > N) {
-            printf("Недопустимое значение n\n");
+        if (n < 1 || n > N || m < 1 || m > N) {
+            printf("Недопустимое значение n или m\n");
             continue;
         }
 
+        int a[n][m];
+
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+            for (int j = 0; j < m; j++) {
                 scanf("%d", (*(a + i) + j));
             }
         }
@@ -33,7 +36,7 @@ int main(void) {
         printf("Исходная матрица:\n");
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+            for (int j = 0; j < m; j++) {
                 printf("%d ", *(*(a + i) + j));
             }
             printf("\n");
@@ -44,7 +47,7 @@ int main(void) {
 
         printf("Линейный вид: ");
 
-        int left = 0, right = n - 1, top = 0, bottom = n - 1;
+        int left = 0, right = m - 1, top = 0, bottom = n - 1;
 
         while (left <= right && top <= bottom) {
             if (dir == LEFT) {
